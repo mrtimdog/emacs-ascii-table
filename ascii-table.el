@@ -22,6 +22,11 @@
 
 (require 'cl-lib)
 
+(defcustom ascii-table-codepoints 512
+  "The size of the ASCII table."
+  :type 'integer
+  :options '(128 1024))
+
 (defvar ascii-table-base 16
   "Number base used for character codes in the ASCII table.
 
@@ -111,7 +116,7 @@ CODEPOINTS/ROW is how many ASCII characters to show in each row.
 
 Each character takes two cells: one for the character number, and
 one for the name or other representation."
-  (let* ((codepoints 128)
+  (let* ((codepoints ascii-table-codepoints)
          (rows (ceiling codepoints codepoints/row))
          (cols (* 2 codepoints/row))
          (table (make-vector (* 2 rows cols) (cons "" nil))))
